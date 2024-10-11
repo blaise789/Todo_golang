@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+// import "fmt"
 
 func main() {
 	todos := Todos{}
-	todos.add("taking breakfast")
-	todos.add("going to sleep")
-   fmt.Println(todos)
+	cmdFl:=NewCmdFlags()
+	storage:=&Storage[Todos]{"todos.json"}
+	storage.Load(&todos)
+	cmdFl.Execute(&todos)
+	storage.Save(todos)
+
 }
